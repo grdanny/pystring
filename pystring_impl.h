@@ -36,7 +36,7 @@ const std::string colon = ":";
 
 
 /* helper macro to fixup start/end slice values */
-#define ADJUST_INDICES(start, end, len)         \
+#define PYSTRING_ADJUST_INDICES(start, end, len)         \
     if (end > len)                          \
         end = len;                          \
     else if (end < 0) {                     \
@@ -218,9 +218,9 @@ const std::string colon = ":";
     //////////////////////////////////////////////////////////////////////////////////////////////
     ///
     ///
-    #define LEFTSTRIP 0
-    #define RIGHTSTRIP 1
-    #define BOTHSTRIP 2
+    #define PYSTRING_LEFTSTRIP 0
+    #define PYSTRING_RIGHTSTRIP 1
+    #define PYSTRING_BOTHSTRIP 2
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     ///
@@ -232,7 +232,7 @@ const std::string colon = ":";
         if ( charslen == 0 )
         {
             i = 0;
-            if ( striptype != RIGHTSTRIP )
+            if ( striptype != PYSTRING_RIGHTSTRIP )
             {
                 while ( i < len && ::isspace( str[i] ) )
                 {
@@ -241,7 +241,7 @@ const std::string colon = ":";
             }
 
             j = len;
-            if ( striptype != LEFTSTRIP )
+            if ( striptype != PYSTRING_LEFTSTRIP )
             {
                 do
                 {
@@ -259,7 +259,7 @@ const std::string colon = ":";
             const char * sep = chars.c_str();
 
             i = 0;
-            if ( striptype != RIGHTSTRIP )
+            if ( striptype != PYSTRING_RIGHTSTRIP )
             {
                 while ( i < len && memchr(sep, str[i], charslen) )
                 {
@@ -268,7 +268,7 @@ const std::string colon = ":";
             }
 
             j = len;
-            if (striptype != LEFTSTRIP)
+            if (striptype != PYSTRING_LEFTSTRIP)
             {
                 do
                 {
@@ -339,7 +339,7 @@ const std::string colon = ":";
     ///
     std::string strip( const std::string & str, const std::string & chars )
     {
-        return do_strip( str, BOTHSTRIP, chars );
+        return do_strip( str, PYSTRING_BOTHSTRIP, chars );
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -347,7 +347,7 @@ const std::string colon = ":";
     ///
     std::string lstrip( const std::string & str, const std::string & chars )
     {
-        return do_strip( str, LEFTSTRIP, chars );
+        return do_strip( str, PYSTRING_LEFTSTRIP, chars );
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,7 +355,7 @@ const std::string colon = ":";
     ///
     std::string rstrip( const std::string & str, const std::string & chars )
     {
-        return do_strip( str, RIGHTSTRIP, chars );
+        return do_strip( str, PYSTRING_RIGHTSTRIP, chars );
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -402,7 +402,7 @@ const std::string colon = ":";
             const char* sub = substr.c_str();
             const char* str = self.c_str();
             
-            ADJUST_INDICES(start, end, len);
+            PYSTRING_ADJUST_INDICES(start, end, len);
             
             if (direction < 0) {
                 // startswith
@@ -815,7 +815,7 @@ const std::string colon = ":";
     ///
     std::string slice( const std::string & str, int start, int end )
     {
-        ADJUST_INDICES(start, end, (int) str.size());
+        PYSTRING_ADJUST_INDICES(start, end, (int) str.size());
         if ( start >= end ) return empty_string;
         return str.substr( start, end - start );
     }
@@ -826,7 +826,7 @@ const std::string colon = ":";
     ///
     int find( const std::string & str, const std::string & sub, int start, int end  )
     {
-        ADJUST_INDICES(start, end, (int) str.size());
+        PYSTRING_ADJUST_INDICES(start, end, (int) str.size());
         
         std::string::size_type result = str.find( sub, start );
         
@@ -854,7 +854,7 @@ const std::string colon = ":";
     ///
     int rfind( const std::string & str, const std::string & sub, int start, int end )
     {
-        ADJUST_INDICES(start, end, (int) str.size());
+        PYSTRING_ADJUST_INDICES(start, end, (int) str.size());
         
         std::string::size_type result = str.rfind( sub, end );
         
