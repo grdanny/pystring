@@ -112,7 +112,7 @@ struct AddTest { AddTest(PYSTRINGTest&& test); };
     std::vector<PYSTRINGTest>& GetUnitTests() {                            \
         static std::vector<PYSTRINGTest> pystring_unit_tests;                  \
         return pystring_unit_tests; }                                       \
-    AddTest::AddTest(PYSTRINGTest&& test){GetUnitTests().emplace_back(test);};  \
+    AddTest::AddTest(PYSTRINGTest&& test){GetUnitTests().emplace_back(test);}  \
     PYSTRING_TEST_SETUP(); \
     int main(int, char **) { std::cerr << "\n" << #app <<"\n\n";        \
         for(size_t i = 0; i < GetUnitTests().size(); ++i) {             \
