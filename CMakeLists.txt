@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(pystring LANGUAGES CXX VERSION 1.1.4)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 option (BUILD_SHARED_LIBS "Build shared libraries (set to OFF to build static libs)" ON)
 option(PYSTRING_HEADER_ONLY "Build as header-only library" OFF)
 
@@ -13,6 +17,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT
          "Installation location" FORCE)
 endif()
 message (STATUS "Installation path will be ${CMAKE_INSTALL_PREFIX}")
+include(GNUInstallDirs)
 
 if(PYSTRING_HEADER_ONLY)
     message(STATUS "Building pystring as header-only library")
@@ -63,4 +68,3 @@ TARGET_LINK_LIBRARIES (pystring_test pystring)
 enable_testing()
 add_test(NAME PyStringTest COMMAND pystring_test)
 
-include(GNUInstallDirs)
