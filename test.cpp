@@ -727,6 +727,8 @@ PYSTRING_ADD_TEST(python3_compat, center)
 PYSTRING_ADD_TEST(python3_compat, count_python3)
 {
     PYSTRING_CHECK_EQUAL(pystring::count("", "", 0), 1);
+    PYSTRING_CHECK_EQUAL(pystring::count("bob", ""), 4);    
+    PYSTRING_CHECK_EQUAL(pystring::count("", "bob"), 0);    
     PYSTRING_CHECK_EQUAL(pystring::count("hello world", "o", 0), 2);
     PYSTRING_CHECK_EQUAL(pystring::count("hello world", "l", 0), 3);
     PYSTRING_CHECK_EQUAL(pystring::count("hello world", "xyz", 0), 0);
